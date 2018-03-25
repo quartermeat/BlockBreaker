@@ -17,7 +17,7 @@ namespace Assets.Scripts
         {
             _boingSound = GetComponent<AudioSource>();
             _paddle = GameObject.FindObjectOfType<Paddle>();
-            _paddleToBallVector = this.transform.position - _paddle.transform.position;
+            _paddleToBallVector = gameObject.transform.position - _paddle.transform.position;
         }
 
         // Update is called once per frame
@@ -25,7 +25,7 @@ namespace Assets.Scripts
         {
             if (!_ballLaunched)
             {
-                this.transform.position = _paddle.transform.position + _paddleToBallVector;
+                gameObject.transform.position = _paddle.transform.position + _paddleToBallVector;
                 if (Input.GetMouseButtonDown(0))
                 {
                     GetComponent<Rigidbody2D>().velocity = new Vector2(2.0f, 10.0f);
@@ -36,9 +36,10 @@ namespace Assets.Scripts
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            _boingSound.Play();
+            
             if (_ballLaunched)
             {
+                _boingSound.Play();
                 if (collision.gameObject.tag != "Paddle")
                 {
                     //do brick stuff
@@ -47,9 +48,9 @@ namespace Assets.Scripts
                 {
                     Vector2 tweak =
                         new Vector2(
-                            (this.GetComponent<Rigidbody2D>().position.x - _paddle.GetComponent<Rigidbody2D>().position.x) * 5f,
+                            (gameObject.GetComponent<Rigidbody2D>().position.x - _paddle.GetComponent<Rigidbody2D>().position.x) * 5f,
                             0f);
-                    //            Vector2 tweak = new Vector2(Random.Range(0, 0.2f), Random.Range(0, 0.2f));
+                    //Vector2 tweak = new Vector2(Random.Range(0, 0.2f), Random.Range(0, 0.2f));
                     GetComponent<Rigidbody2D>().velocity += tweak;
                 }
             }

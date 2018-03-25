@@ -32,7 +32,7 @@ namespace Assets.Scripts
         {
             Vector3 paddlePosVect = new Vector3(0.5f, this.transform.position.y, 5f);
             float mousePosGameBlocks = Input.mousePosition.x / Screen.width * BlockNumWidth;
-            paddlePosVect.x = Mathf.Clamp(mousePosGameBlocks, 0f, 15f);
+            paddlePosVect.x = Mathf.Clamp(mousePosGameBlocks, 1.5f, 14.5f);
             this.transform.position = paddlePosVect;
         }
 
@@ -41,7 +41,7 @@ namespace Assets.Scripts
             Vector3 paddlePosVect = new Vector3(0.5f, this.transform.position.y, 5f);
             Vector3 ballPosVect = _ball.transform.position;
 
-            paddlePosVect.x = Mathf.Clamp(ballPosVect.x - 0.5f, 0f, 15f);
+            paddlePosVect.x = Mathf.Clamp(ballPosVect.x, 1.5f, 14.5f);
             this.transform.position = paddlePosVect;
         }
     }
